@@ -1,9 +1,9 @@
 <template>
   <div class="recommend">
     <div v-for="item in recommends" class="recommend-item">
-      <a :href="item.fields.link">
-        <img :src="item.fields.image" @load="recommendImg">
-        <div>{{item.fields.title}}</div>
+      <a :href="item.link">
+        <img :src="item.icon" @load="recommendImg">
+        <div>{{item.title}}</div>
       </a>
     </div>
   </div>
@@ -31,19 +31,22 @@
 <style scoped>
   .recommend {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     text-align: center;
     font-size: 12px;
 
-    padding: 10px 0 20px;
+    padding: 0 10px 20px;
+    border-top: 10px solid #eee;
     border-bottom: 10px solid #eee;
   }
   .recommend-item {
     flex: 1;
+    padding: 5px 0;
   }
   .recommend-item img{
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin-bottom: 10px;
   }
 </style>

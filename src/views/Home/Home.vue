@@ -6,15 +6,17 @@
             :probe-type="3"
             @scroll="contentScroll"
             :pull-up-load="true" @pullingUp="loadMore">
-      <home-swiper :banners="SwiperImage" @SwiperImageLoad.once="SwiperImageLoad" ref="homeSwiper"></home-swiper>
-      
+      <home-swiper :banners="SwiperImage" ref="homeSwiper"></home-swiper>
+      <recomment-view :recommends="recommends"></recomment-view>
     </scroll>
   </div>
 </template>
 
 <script>
-  import NavBar from "../../components/common/navbar/NavBar";
   import HomeSwiper from "./childComps/HomeSwiper";
+  import RecommentView from "./childComps/RecommentView";
+
+  import NavBar from "../../components/common/navbar/NavBar";
   import Scroll from "../../components/common/scroll/Scroll";
 
   import {getHomeData} from "../../network/home";
@@ -24,33 +26,30 @@
     components: {
       NavBar,
       HomeSwiper,
-      Scroll
+      Scroll,
+      RecommentView
     },
     data() {
       return {
-        SwiperImage: []
+        SwiperImage: [],
+        recommends: []
       }
     },
     created() {
       this.getHomeData()
     },
     methods: {
-      SwiperImageLoad() {
-
-      },
       contentScroll(position) {
         this.isShowBackTop = -(position.y) > 500
 
         this.isTabFixed = -(position.y) > this.tabOffsetTop
       },
-
-      loadMore() {
-
-      },
+      loadMore() {},
       getHomeData() {
         getHomeData().then(res => {
           if(res.code === 200){
             this.SwiperImage = res.data.swiper_image_info
+            this.recommends = res.data.home_sort_info
           }
         })
       }

@@ -39,6 +39,14 @@ Vue.use(VueRouter)
       meta: {
         title: '个人中心'
       }
+    },
+    {
+      path: '/goods_list',
+      name: 'GoodsList',
+      component: () => import('../views/Goods_List/GoodsList.vue'),
+      meta: {
+        title: '商品列表'
+      }
     }
 ]
 
