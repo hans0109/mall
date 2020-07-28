@@ -47,6 +47,13 @@ Vue.use(VueRouter)
       meta: {
         title: '商品列表'
       }
+    },
+    {
+      path: '*',
+      component: () => import('../views/NotFound'),
+      meta: {
+        title: '404'
+      }
     }
 ]
 

@@ -42,11 +42,11 @@
   }
   .recommend-item {
     flex: 1;
-    padding: 5px 0;
+    padding: 5px;
   }
   .recommend-item img{
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     margin-bottom: 10px;
   }
 </style>

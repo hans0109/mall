@@ -8,7 +8,8 @@
             :pull-up-load="true" @pullingUp="loadMore">
       <home-swiper :banners="SwiperImage" ref="homeSwiper"></home-swiper>
       <recomment-view :recommends="recommends"></recomment-view>
-      <like-view :like="likeView"></like-view>
+      <like-view :like="likeView" @ImageLoad="ImageLoad"></like-view>
+      <home-bottom></home-bottom>
     </scroll>
   </div>
 </template>
@@ -17,6 +18,7 @@
   import HomeSwiper from "./childComps/HomeSwiper";
   import RecommentView from "./childComps/RecommentView";
   import LikeView from "./childComps/LikeView";
+  import HomeBottom from "./childComps/HomeBottom";
 
   import NavBar from "../../components/common/navbar/NavBar";
   import Scroll from "../../components/common/scroll/Scroll";
@@ -29,6 +31,7 @@
       HomeSwiper,
       RecommentView,
       LikeView,
+      HomeBottom,
 
       NavBar,
       Scroll,
@@ -50,12 +53,15 @@
         this.isTabFixed = -(position.y) > this.tabOffsetTop
       },
       loadMore() {},
+      ImageLoad() {
+        this.$refs.scroll.refresh()
+      },
       getHomeData() {
         getHomeData().then(res => {
           if(res.code === 200){
             this.SwiperImage = res.data.swiper_image_info
             this.recommends = res.data.home_sort_info
-
+            this.likeView = res.data.home_recommend_info
           }
         })
       }
