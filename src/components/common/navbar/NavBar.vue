@@ -21,11 +21,11 @@
   }
 
   .left, .right {
-    width: 60px;
+    flex: 1;
   }
 
   .center {
-    flex: 1;
+    flex: 4;
     font-size: 17px;
   }
 </style>

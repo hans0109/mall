@@ -2,12 +2,14 @@
   <div id="category">
     <nav-bar class="category-nav"><div slot="center">分类</div></nav-bar>
     <category-list :left_list="left_list" :right_list="right_list" @titleClick="titleClick"></category-list>
+
   </div>
 </template>
 
 <script>
   import NavBar from "../../components/common/navbar/NavBar";
   import CategoryList from "./childComps/CategoryList";
+  import Scroll from "../../components/common/scroll/Scroll";
 
   import {getCategoryData} from "../../network/category";
 
@@ -17,12 +19,14 @@
       return {
         category: [],
         left_list: [],
-        right_list: []
+        right_list: [],
+        param: ''
       }
     },
     components: {
       NavBar,
-      CategoryList
+      CategoryList,
+      Scroll
     },
     created() {
       this.getCategoryData()
@@ -38,8 +42,13 @@
       },
       titleClick(index) {
         this.right_list = this.category[index].childList
-      }
+      },
+      contentScroll(position) {
+        this.isShowBackTop = -(position.y) > 500
 
+        this.isTabFixed = -(position.y) > this.tabOffsetTop
+      },
+      loadMore() {},
     }
   }
 </script>
@@ -48,6 +57,8 @@
   #category {
     height: 100vh;
     position: relative;
+    left: 0;
+    right: 0;
   }
   .category-nav {
     background-color: #f4f4f4;
@@ -61,5 +72,13 @@
   }
   .category_right{
     flex: 5;
+  }
+  .content {
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
   }
 </style>

@@ -2,7 +2,7 @@ import {request} from "./request"
 import axios from 'axios'
 export function getHomeData() {
   return request({
-    url: '/home/data/',
+    url: '/data/home/',
   })
 }
 

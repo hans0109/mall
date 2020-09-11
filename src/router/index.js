@@ -3,6 +3,11 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
   const routes = [
     {
       path: '/',
@@ -13,7 +18,8 @@ Vue.use(VueRouter)
       name: 'Home',
       component: () => import('../views/Home/Home.vue'),
       meta: {
-        title: '首页'
+        title: '首页',
+        keepAlive: true
       }
     },
     {
@@ -21,7 +27,8 @@ Vue.use(VueRouter)
       name: 'Category',
       component: () => import('../views/Category/Category.vue'),
       meta: {
-        title: '分类'
+        title: '分类',
+        keepAlive: true
       }
     },
     {
@@ -29,7 +36,8 @@ Vue.use(VueRouter)
       name: 'Cart',
       component: () => import('../views/Cart/Cart.vue'),
       meta: {
-        title: '购物车'
+        title: '购物车',
+        keepAlive: true
       }
     },
     {
@@ -37,7 +45,8 @@ Vue.use(VueRouter)
       name: 'Profile',
       component: () => import('../views/Profile/Profile.vue'),
       meta: {
-        title: '个人中心'
+        title: '个人中心',
+        keepAlive: true
       }
     },
     {
@@ -45,7 +54,15 @@ Vue.use(VueRouter)
       name: 'GoodsList',
       component: () => import('../views/Goods_List/GoodsList.vue'),
       meta: {
-        title: '商品列表'
+        title: '商品列表',
+      }
+    },
+    {
+      path: '/goods_detail',
+      name: 'GoodsDetail',
+      component: () => import('../views/GoodsDetail/GoodsDetail'),
+      meta: {
+        title: '商品详情'
       }
     },
     {
